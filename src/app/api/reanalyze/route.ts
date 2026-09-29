@@ -3,6 +3,9 @@ import { NormalizedResume } from '@/lib/types';
 import { getAIProvider } from '@/lib/ai';
 import { getJob, getAnalysis, saveResume, saveAnalysis, getSnapshotsForResume } from '@/lib/storage';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

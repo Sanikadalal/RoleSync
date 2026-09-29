@@ -3,6 +3,9 @@ import { parseResumeFile } from '@/lib/parser';
 import { getAIProvider } from '@/lib/ai';
 import { saveResume, saveJob, saveAnalysis } from '@/lib/storage';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
