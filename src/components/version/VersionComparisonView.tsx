@@ -30,7 +30,7 @@ export function VersionComparisonView({
     <div className="min-h-screen bg-zinc-950 pb-20 pt-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-zinc-800 pb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-2 border-black pb-6">
           <div className="space-y-1">
             <Link
               href={`/analysis/${v2Snapshot.analysis.id}`}
@@ -47,14 +47,14 @@ export function VersionComparisonView({
 
           <Link
             href={`/editor/${resumeId}?analysisId=${v2Snapshot.analysis.id}`}
-            className="rounded-xl bg-emerald-500 px-5 py-2 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition-all shadow-md"
+            className="rounded-xl bg-violet-300 px-5 py-2 text-xs font-semibold text-black hover:bg-violet-400 transition-all shadow-md"
           >
             Continue Editing
           </Link>
         </div>
 
         {/* Score Delta Summary Box */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-6">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/80 p-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <span className="text-xs uppercase tracking-wider font-semibold text-emerald-400">
@@ -67,8 +67,8 @@ export function VersionComparisonView({
                 <span
                   className={`text-sm font-bold px-2.5 py-1 rounded ${
                     scoreDiff >= 0
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                      : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                      ? 'bg-emerald-200 text-emerald-400 border-2 border-black'
+                      : 'bg-red-200 text-red-400 border-2 border-black'
                   }`}
                 >
                   {scoreDiff >= 0 ? `+${scoreDiff}` : scoreDiff} points
@@ -77,7 +77,7 @@ export function VersionComparisonView({
             </div>
 
             {/* Category Deltas */}
-            <div className="grid grid-cols-3 gap-4 border-l border-zinc-800 pl-6 text-xs">
+            <div className="grid grid-cols-3 gap-4 border-l-2 border-black pl-6 text-xs">
               <div>
                 <div className="text-zinc-400">Required Skills</div>
                 <div className="font-bold text-emerald-400">
@@ -103,7 +103,7 @@ export function VersionComparisonView({
           </div>
 
           {/* Why did score change? Callout */}
-          <div className="mt-6 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4 text-xs text-emerald-300">
+          <div className="mt-6 rounded-lg border-2 border-black bg-emerald-200 p-4 text-xs text-emerald-300">
             <span className="font-bold text-zinc-100">Why did the score change? </span>
             {v2Snapshot.changesSummary.join('; ')}
           </div>
@@ -112,10 +112,10 @@ export function VersionComparisonView({
         {/* Side-by-Side Resume View */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* LEFT: Previous Version */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+          <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-4">
+            <div className="flex items-center justify-between border-b-2 border-black pb-3">
               <span className="text-xs font-semibold text-zinc-400">
-                Version #{v1Snapshot.versionNumber} ({new Date(v1Snapshot.createdAt).toLocaleDateString()})
+                Version #{v1Snapshot.versionNumber} ({new Date(v1Snapshot.createdAt).toLocaleDateString('en-GB', { timeZone: 'UTC' })})
               </span>
               <span className="text-xs font-bold text-zinc-400">
                 Score: {v1Snapshot.analysis.overallScore}%
@@ -125,7 +125,7 @@ export function VersionComparisonView({
             <div className="space-y-3 font-mono text-xs text-zinc-400">
               <div>
                 <span className="text-zinc-300 font-semibold block mb-1">Skills List:</span>
-                <p className="bg-zinc-950 p-3 rounded border border-zinc-800">
+                <p className="bg-zinc-950 p-3 rounded border-2 border-black">
                   {v1Snapshot.resumeData.skills.join(', ')}
                 </p>
               </div>
@@ -134,7 +134,7 @@ export function VersionComparisonView({
                 <span className="text-zinc-300 font-semibold block mb-1">Work Experience:</span>
                 <div className="space-y-2">
                   {v1Snapshot.resumeData.experience.map((exp) => (
-                    <div key={exp.id} className="bg-zinc-950 p-3 rounded border border-zinc-800 space-y-1">
+                    <div key={exp.id} className="bg-zinc-950 p-3 rounded border-2 border-black space-y-1">
                       <div className="text-zinc-200 font-bold">
                         {exp.role} — {exp.company}
                       </div>
@@ -151,8 +151,8 @@ export function VersionComparisonView({
           </div>
 
           {/* RIGHT: Current Version (With Additions Highlighted) */}
-          <div className="rounded-xl border border-emerald-500/30 bg-zinc-900/60 p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+          <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-4">
+            <div className="flex items-center justify-between border-b-2 border-black pb-3">
               <span className="text-xs font-semibold text-emerald-400">
                 Version #{v2Snapshot.versionNumber} (Current)
               </span>
@@ -164,7 +164,7 @@ export function VersionComparisonView({
             <div className="space-y-3 font-mono text-xs text-zinc-300">
               <div>
                 <span className="text-zinc-100 font-semibold block mb-1">Skills List:</span>
-                <p className="bg-zinc-950 p-3 rounded border border-emerald-500/20 text-emerald-300">
+                <p className="bg-zinc-950 p-3 rounded border-2 border-black text-emerald-300">
                   {v2Snapshot.resumeData.skills.join(', ')}
                 </p>
               </div>
@@ -175,7 +175,7 @@ export function VersionComparisonView({
                   {v2Snapshot.resumeData.experience.map((exp) => (
                     <div
                       key={exp.id}
-                      className="bg-zinc-950 p-3 rounded border border-emerald-500/20 space-y-1"
+                      className="bg-zinc-950 p-3 rounded border-2 border-black space-y-1"
                     >
                       <div className="text-emerald-400 font-bold">
                         {exp.role} — {exp.company}

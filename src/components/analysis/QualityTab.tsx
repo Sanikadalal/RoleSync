@@ -11,7 +11,7 @@ export function QualityTab({ quality }: QualityTabProps) {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
         <div className="flex items-center gap-2 mb-2">
           <FileText className="h-5 w-5 text-emerald-400" />
           <h3 className="text-sm font-semibold text-zinc-100">
@@ -25,12 +25,12 @@ export function QualityTab({ quality }: QualityTabProps) {
 
       {/* Quality Score Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+        <div className="rounded-xl border-2 border-black bg-zinc-950 p-5">
           <div className="text-xs text-zinc-400 font-medium">Readability & Tone</div>
           <div className="mt-2 text-3xl font-extrabold text-emerald-400">
             {quality.readability}%
           </div>
-          <div className="mt-2 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+          <div className="mt-2 h-3 w-full bg-white border-2 border-black overflow-hidden">
             <div
               className="h-full bg-emerald-500"
               style={{ width: `${quality.readability}%` }}
@@ -38,12 +38,12 @@ export function QualityTab({ quality }: QualityTabProps) {
           </div>
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+        <div className="rounded-xl border-2 border-black bg-zinc-950 p-5">
           <div className="text-xs text-zinc-400 font-medium">Structure & Headers</div>
           <div className="mt-2 text-3xl font-extrabold text-emerald-400 font-mono">
             {quality.structure}%
           </div>
-          <div className="mt-2 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+          <div className="mt-2 h-3 w-full bg-white border-2 border-black overflow-hidden">
             <div
               className="h-full bg-emerald-500"
               style={{ width: `${quality.structure}%` }}
@@ -51,7 +51,7 @@ export function QualityTab({ quality }: QualityTabProps) {
           </div>
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+        <div className="rounded-xl border-2 border-black bg-zinc-950 p-5">
           <div className="text-xs text-zinc-400 font-medium">Quantified Impact</div>
           <div
             className={`mt-2 text-3xl font-extrabold font-mono ${
@@ -64,7 +64,7 @@ export function QualityTab({ quality }: QualityTabProps) {
           >
             {quality.impact}%
           </div>
-          <div className="mt-2 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+          <div className="mt-2 h-3 w-full bg-white border-2 border-black overflow-hidden">
             <div
               className="h-full bg-emerald-500"
               style={{ width: `${quality.impact}%` }}
@@ -72,12 +72,12 @@ export function QualityTab({ quality }: QualityTabProps) {
           </div>
         </div>
 
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+        <div className="rounded-xl border-2 border-black bg-zinc-950 p-5">
           <div className="text-xs text-zinc-400 font-medium">Technical Evidence</div>
           <div className="mt-2 text-3xl font-extrabold text-emerald-400 font-mono">
             {quality.technicalEvidence}%
           </div>
-          <div className="mt-2 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+          <div className="mt-2 h-3 w-full bg-white border-2 border-black overflow-hidden">
             <div
               className="h-full bg-emerald-500"
               style={{ width: `${quality.technicalEvidence}%` }}
@@ -87,7 +87,7 @@ export function QualityTab({ quality }: QualityTabProps) {
       </div>
 
       {/* Bullet Quality Suggestions */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="h-5 w-5 text-emerald-400" />
           <h4 className="text-sm font-semibold text-zinc-100">
@@ -100,13 +100,13 @@ export function QualityTab({ quality }: QualityTabProps) {
             {quality.bulletQualitySuggestions.map((s, idx) => (
               <div
                 key={idx}
-                className="rounded-lg border border-zinc-800 bg-zinc-950 p-4 space-y-2"
+                className="rounded-lg border-2 border-black bg-zinc-950 p-4 space-y-2"
               >
                 <div className="text-[10px] font-mono text-zinc-400 uppercase">{s.section}</div>
-                <div className="text-xs text-red-300 bg-red-500/10 p-2.5 rounded border border-red-500/20">
+                <div className="text-xs text-red-300 bg-red-200 p-2.5 rounded border-2 border-black">
                   <span className="font-semibold">Original: </span> &quot;{s.original}&quot;
                 </div>
-                <div className="text-xs text-emerald-300 bg-emerald-500/10 p-2.5 rounded border border-emerald-500/20">
+                <div className="text-xs text-emerald-300 bg-emerald-200 p-2.5 rounded border-2 border-black">
                   <span className="font-semibold">Suggestion: </span> &quot;{s.suggestion}&quot;
                 </div>
                 <p className="text-[11px] text-zinc-400 italic">Reason: {s.reason}</p>

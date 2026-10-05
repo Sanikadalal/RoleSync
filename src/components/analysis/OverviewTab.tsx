@@ -28,7 +28,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
   return (
     <div className="space-y-8">
       {/* Hero Score Box */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-6 sm:p-8 backdrop-blur">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/80 p-6 sm:p-8">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="flex items-center gap-2">
@@ -47,7 +47,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
 
           <div className="flex items-center gap-6 self-center lg:self-auto">
             <div className="relative flex items-center justify-center">
-              <div className="h-28 w-28 rounded-full border-4 border-zinc-800 flex items-center justify-center bg-zinc-950">
+              <div className="h-28 w-28 rounded-full border-4 border-black flex items-center justify-center bg-zinc-950">
                 <div className="text-center">
                   <div className="text-3xl font-extrabold text-emerald-400">{overallScore}%</div>
                   <div className="text-[10px] text-zinc-400 font-medium">Overall Match</div>
@@ -58,7 +58,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
             <div className="flex flex-col gap-2">
               <Link
                 href={`/editor/${analysis.resumeId}?analysisId=${analysis.id}`}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition-all shadow-md shadow-emerald-950/40"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-violet-300 px-4 py-2.5 text-xs font-semibold text-black hover:bg-violet-400 transition-all shadow-md"
               >
                 <span>Edit Resume & Improve</span>
                 <ArrowUpRight className="h-4 w-4" />
@@ -75,13 +75,13 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
         </div>
 
         {/* Score Breakdown Progress Grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-t border-zinc-800/80 pt-6">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-t-2 border-black pt-6">
           <div>
             <div className="flex justify-between text-xs font-medium mb-1.5">
               <span className="text-zinc-400">Required Skills (30%)</span>
               <span className="text-emerald-400 font-bold">{scoreBreakdown.requiredSkills}%</span>
             </div>
-            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-3 w-full bg-white border-2 border-black overflow-hidden">
               <div
                 className="h-full bg-emerald-500 transition-all"
                 style={{ width: `${scoreBreakdown.requiredSkills}%` }}
@@ -94,7 +94,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
               <span className="text-zinc-400">Preferred Skills (10%)</span>
               <span className="text-teal-400 font-bold">{scoreBreakdown.preferredSkills}%</span>
             </div>
-            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-3 w-full bg-white border-2 border-black overflow-hidden">
               <div
                 className="h-full bg-teal-500 transition-all"
                 style={{ width: `${scoreBreakdown.preferredSkills}%` }}
@@ -107,7 +107,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
               <span className="text-zinc-400">Experience Alignment (20%)</span>
               <span className="text-emerald-400 font-bold">{scoreBreakdown.experienceAlignment}%</span>
             </div>
-            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-3 w-full bg-white border-2 border-black overflow-hidden">
               <div
                 className="h-full bg-emerald-500 transition-all"
                 style={{ width: `${scoreBreakdown.experienceAlignment}%` }}
@@ -120,7 +120,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
               <span className="text-zinc-400">Keyword Coverage (10%)</span>
               <span className="text-emerald-400 font-bold">{scoreBreakdown.keywordCoverage}%</span>
             </div>
-            <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-3 w-full bg-white border-2 border-black overflow-hidden">
               <div
                 className="h-full bg-emerald-500 transition-all"
                 style={{ width: `${scoreBreakdown.keywordCoverage}%` }}
@@ -133,7 +133,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
       {/* Top Strengths & Critical Gaps Dual Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Top Demonstrated Strengths */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
           <div className="flex items-center gap-2 mb-4">
             <CheckCircle2 className="h-5 w-5 text-emerald-400" />
             <h3 className="text-sm font-semibold text-zinc-100">Demonstrated Skill Strengths</h3>
@@ -143,12 +143,12 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
             {matchedSkills.slice(0, 4).map((s, idx) => (
               <div
                 key={idx}
-                className="rounded-lg border border-zinc-800 bg-zinc-950 p-3 flex items-start justify-between"
+                className="rounded-lg border-2 border-black bg-zinc-950 p-3 flex items-start justify-between"
               >
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-semibold text-zinc-100">{s.normalizedSkill}</span>
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-200 text-emerald-400 border-2 border-black">
                       {s.importance}
                     </span>
                   </div>
@@ -161,7 +161,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
         </div>
 
         {/* Critical Gaps */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
           <div className="flex items-center gap-2 mb-4">
             <AlertTriangle className="h-5 w-5 text-amber-400" />
             <h3 className="text-sm font-semibold text-zinc-100">Critical Skill Gaps</h3>
@@ -172,11 +172,11 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
               {criticalGaps.map((gap, idx) => (
                 <div
                   key={idx}
-                  className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-3"
+                  className="rounded-lg border-2 border-black bg-amber-200 p-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold text-amber-300">{gap.skill}</span>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-200 text-amber-300">
                       {gap.severity}
                     </span>
                   </div>
@@ -185,7 +185,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
               ))}
             </div>
           ) : (
-            <div className="rounded-lg border border-zinc-800 bg-zinc-950 p-6 text-center text-xs text-zinc-400">
+            <div className="rounded-lg border-2 border-black bg-zinc-950 p-6 text-center text-xs text-zinc-400">
               No critical required skill gaps detected! All required technologies have evidence.
             </div>
           )}
@@ -193,7 +193,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
       </div>
 
       {/* Highest Impact Recommendations Preview */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-emerald-400" />
@@ -212,7 +212,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
           {recommendations.slice(0, 2).map((rec) => (
             <div
               key={rec.id}
-              className="rounded-lg border border-zinc-800 bg-zinc-950 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+              className="rounded-lg border-2 border-black bg-zinc-950 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
             >
               <div>
                 <h4 className="text-xs font-semibold text-zinc-200">{rec.title}</h4>
@@ -221,7 +221,7 @@ export function OverviewTab({ analysis, onSelectTab }: OverviewTabProps) {
 
               <Link
                 href={`/editor/${analysis.resumeId}?analysisId=${analysis.id}`}
-                className="shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20 transition-all"
+                className="shrink-0 rounded-lg bg-emerald-200 border-2 border-black px-3 py-1.5 text-xs font-medium text-emerald-400 hover:bg-emerald-200 transition-all"
               >
                 Apply Edit
               </Link>

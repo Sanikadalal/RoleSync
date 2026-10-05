@@ -44,7 +44,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
   return (
     <div className="space-y-6">
       {/* Category Progress Bars */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6">
         <h3 className="text-sm font-semibold text-zinc-100 mb-4">Category Coverage Matrix</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat) => {
@@ -58,12 +58,12 @@ export function SkillsTab({ skills }: SkillsTabProps) {
                 : 0;
 
             return (
-              <div key={cat} className="rounded-lg border border-zinc-800 bg-zinc-950 p-3.5">
+              <div key={cat} className="rounded-lg border-2 border-black bg-zinc-950 p-3.5">
                 <div className="flex justify-between text-xs font-medium mb-1.5">
                   <span className="text-zinc-300">{cat}</span>
                   <span className="text-emerald-400 font-bold">{avgMatch}%</span>
                 </div>
-                <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-3 w-full bg-white border-2 border-black overflow-hidden">
                   <div
                     className="h-full bg-emerald-500 transition-all"
                     style={{ width: `${avgMatch}%` }}
@@ -76,7 +76,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
       </div>
 
       {/* Controls: Search, Filters, Sort */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Search */}
         <div className="relative w-full sm:w-64">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
@@ -85,7 +85,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
             placeholder="Search skills or categories..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 pl-9 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-lg border-2 border-black bg-zinc-950 pl-9 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-400 focus:border-black focus:outline-none"
           />
         </div>
 
@@ -94,7 +94,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
+            className="rounded-lg border-2 border-black bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
           >
             <option value="all">Status: All</option>
             <option value="matched">Matched (75%+)</option>
@@ -105,7 +105,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
           <select
             value={importanceFilter}
             onChange={(e) => setImportanceFilter(e.target.value)}
-            className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
+            className="rounded-lg border-2 border-black bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
           >
             <option value="all">Importance: All</option>
             <option value="required">Required</option>
@@ -115,7 +115,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
+            className="rounded-lg border-2 border-black bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
           >
             <option value="importance">Sort: Importance</option>
             <option value="match">Sort: Match %</option>
@@ -125,10 +125,10 @@ export function SkillsTab({ skills }: SkillsTabProps) {
       </div>
 
       {/* Main Skill Matrix Table */}
-      <div className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900/60">
+      <div className="overflow-x-auto rounded-xl border-2 border-black bg-zinc-900/60">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-950/80 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+            <tr className="border-b-2 border-black bg-white text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               <th className="py-3 px-4">Skill</th>
               <th className="py-3 px-4">Importance</th>
               <th className="py-3 px-4">Match %</th>
@@ -137,7 +137,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
               <th className="py-3 px-4">Recommendation</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-800/60 text-xs text-zinc-300">
+          <tbody className="divide-y divide-black text-xs text-zinc-300">
             {sortedSkills.map((s, idx) => (
               <tr key={idx} className="hover:bg-zinc-850/50 transition-colors">
                 <td className="py-3.5 px-4 font-semibold text-zinc-100">
@@ -149,8 +149,8 @@ export function SkillsTab({ skills }: SkillsTabProps) {
                   <span
                     className={`inline-flex px-2 py-0.5 rounded text-[10px] uppercase font-mono border ${
                       s.importance === 'required'
-                        ? 'bg-red-500/10 text-red-400 border-red-500/30'
-                        : 'bg-teal-500/10 text-teal-400 border-teal-500/30'
+                        ? 'bg-red-200 text-red-400 border-black'
+                        : 'bg-teal-200 text-teal-400 border-black'
                     }`}
                   >
                     {s.importance}
@@ -184,10 +184,10 @@ export function SkillsTab({ skills }: SkillsTabProps) {
                   <span
                     className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium border ${
                       s.confidence === 'high'
-                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                        ? 'bg-emerald-200 text-emerald-400 border-black'
                         : s.confidence === 'medium'
-                        ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                        : 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                        ? 'bg-amber-200 text-amber-400 border-black'
+                        : 'bg-zinc-800 text-zinc-400 border-black'
                     }`}
                   >
                     {s.confidence.toUpperCase()}
