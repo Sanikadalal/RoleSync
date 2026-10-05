@@ -40,27 +40,27 @@ export function AnalysisDashboard({
   const [activeTab, setActiveTab] = useState<string>('overview');
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: FileCheck },
-    { id: 'skills', label: 'Skills Matrix', icon: Layers, count: analysis.skills.length },
-    { id: 'keywords', label: 'Keywords', icon: KeyRound },
-    { id: 'quality', label: 'Resume Quality', icon: FileText },
+    { id: 'overview', label: 'Score', icon: FileCheck },
     {
       id: 'recommendations',
-      label: 'Suggestions',
+      label: 'What to fix',
       icon: Sparkles,
       count: analysis.recommendations.length,
     },
+    { id: 'skills', label: 'Skills', icon: Layers, count: analysis.skills.length },
+    { id: 'keywords', label: 'Keywords', icon: KeyRound },
+    { id: 'quality', label: 'Resume quality', icon: FileText },
     { id: 'versions', label: 'Versions', icon: GitBranch, count: snapshots.length || 1 },
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 pb-16">
+    <div className="min-h-screen pb-16">
       {/* Header Banner */}
-      <div className="border-b border-zinc-800 bg-zinc-900/60 pt-8 pb-6">
+      <div className="border-b-4 border-black bg-violet-300 pt-8 pb-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs font-medium text-emerald-400">
+              <div className="flex items-center gap-2 text-xs font-bold text-black">
                 <Briefcase className="h-4 w-4" />
                 <span>{roleTitle}</span>
                 <span className="text-zinc-600">•</span>
@@ -70,7 +70,7 @@ export function AnalysisDashboard({
 
               <h1 className="text-2xl sm:text-3xl font-bold text-zinc-100 tracking-tight flex items-center gap-3">
                 Resume–Job Match Analysis
-                <span className="text-xs font-mono font-normal px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 border-2 border-black bg-white text-black">
                   Version #{analysis.versionNumber}
                 </span>
               </h1>
@@ -81,7 +81,7 @@ export function AnalysisDashboard({
 
               <Link
                 href={`/editor/${analysis.resumeId}?analysisId=${analysis.id}`}
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition-all shadow-md shadow-emerald-950/40"
+                className="inline-flex items-center gap-2 bg-yellow-300 px-5 py-2.5 text-sm text-black border-2 border-black shadow-[4px_4px_0_0_#000] font-bold transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 <Edit3 className="h-4 w-4" />
                 <span>Edit Resume</span>
@@ -90,21 +90,22 @@ export function AnalysisDashboard({
           </div>
 
           {/* Navigation Tabs Bar */}
-          <div className="mt-8 flex items-center gap-2 border-b border-zinc-800/80 overflow-x-auto no-scrollbar">
+          <div className="mt-8 flex items-end gap-2 overflow-x-auto pb-1 no-scrollbar">
             {tabs.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                className={`flex items-center gap-2 px-4 py-3 text-xs font-medium border-b-2 transition-all whitespace-nowrap ${
+                aria-current={activeTab === t.id ? 'page' : undefined}
+                className={`flex items-center gap-2 border-2 border-black px-4 py-2.5 text-sm font-bold whitespace-nowrap transition-all ${
                   activeTab === t.id
-                    ? 'border-emerald-500 text-emerald-400 bg-emerald-500/5'
-                    : 'border-transparent text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
+                    ? 'bg-black text-white shadow-[4px_4px_0_0_#7c3aed]'
+                    : 'bg-white text-black hover:-translate-y-0.5 hover:bg-yellow-200'
                 }`}
               >
                 <t.icon className="h-4 w-4" />
                 <span>{t.label}</span>
                 {t.count !== undefined && (
-                  <span className="ml-1 rounded-full bg-zinc-800 px-2 py-0.5 text-[10px] font-mono text-zinc-300">
+                  <span className="ml-1 border border-black bg-yellow-300 px-1.5 text-[11px] font-mono text-black">
                     {t.count}
                   </span>
                 )}

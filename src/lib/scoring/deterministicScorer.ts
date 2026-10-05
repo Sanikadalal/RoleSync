@@ -16,6 +16,18 @@ import {
   areSkillsRelated,
 } from './skillDictionary';
 
+export function computeOverallScore(b: ScoreBreakdown): number {
+  return Math.round(
+    b.requiredSkills * 0.3 +
+      b.preferredSkills * 0.1 +
+      b.experienceAlignment * 0.2 +
+      b.responsibilityAlignment * 0.15 +
+      b.keywordCoverage * 0.1 +
+      b.projectEvidence * 0.1 +
+      b.educationAlignment * 0.05
+  );
+}
+
 export function calculateDeterministicScore(
   resume: NormalizedResume,
   job: JobAnalysis
@@ -265,16 +277,7 @@ export function calculateDeterministicScore(
     educationAlignment: Math.min(100, Math.max(0, educationAlignment)),
   };
 
-  const weightedScore =
-    scoreBreakdown.requiredSkills * 0.3 +
-    scoreBreakdown.preferredSkills * 0.1 +
-    scoreBreakdown.experienceAlignment * 0.2 +
-    scoreBreakdown.responsibilityAlignment * 0.15 +
-    scoreBreakdown.keywordCoverage * 0.1 +
-    scoreBreakdown.projectEvidence * 0.1 +
-    scoreBreakdown.educationAlignment * 0.05;
-
-  const overallScore = Math.round(weightedScore);
+  const overallScore = computeOverallScore(scoreBreakdown);
 
   // 6. Resume Quality Audit
   const totalBullets = resume.experience.flatMap((e) => e.description).length;

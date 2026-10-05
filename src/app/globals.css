@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
+/*
+  Neubrutalism + lavender.
+  Rules: thick black borders, hard offset shadows (zero blur), square corners,
+  flat color fills. Existing components use zinc/emerald/amber/red utility names,
+  so the palettes below are remapped to the new light theme in one place.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf9ff;
+  --foreground: #0a0a0a;
+  --ink: #000000;
+  --lavender: #c4b5fd;
+  --lavender-deep: #7c3aed;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Square corners everywhere (rounded-full stays for dots and spinners) */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius: 0;
+
+  /* Hard shadows, no blur */
+  --shadow-sm: 2px 2px 0 0 #000;
+  --shadow: 3px 3px 0 0 #000;
+  --shadow-md: 4px 4px 0 0 #000;
+  --shadow-lg: 6px 6px 0 0 #000;
+  --shadow-xl: 8px 8px 0 0 #000;
+  --shadow-2xl: 10px 10px 0 0 #000;
+
+  /* Former dark neutrals -> ink text, lavender-tinted paper surfaces */
+  --color-zinc-100: #0a0a0a;
+  --color-zinc-200: #171717;
+  --color-zinc-300: #27272a;
+  --color-zinc-400: #3f3f46;
+  --color-zinc-500: #52525b;
+  --color-zinc-600: #71717a;
+  --color-zinc-700: #ddd6fe;
+  --color-zinc-800: #ede9fe;
+  --color-zinc-850: #f5f3ff;
+  --color-zinc-900: #ffffff;
+  --color-zinc-950: #fbf9ff;
+
+  /* Status: matched = mint */
+  --color-emerald-300: #166534;
+  --color-emerald-400: #15803d;
+  --color-emerald-500: #86efac;
+  --color-emerald-950: #dcfce7;
+  --color-teal-300: #115e59;
+  --color-teal-400: #0f766e;
+  --color-teal-500: #5eead4;
+  /* Status: partial = yellow */
+  --color-amber-300: #854d0e;
+  --color-amber-400: #a16207;
+  --color-amber-500: #fde047;
+  --color-yellow-500: #fde047;
+  /* Status: missing = coral */
+  --color-red-300: #991b1b;
+  --color-red-400: #b91c1c;
+  --color-red-500: #ff8a8a;
+}
+
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  /* faint dot grid for the paper feel */
+  background-image: radial-gradient(#d9d0f5 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+h4,
+h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+::selection {
+  background: var(--lavender);
+  color: #000;
+}
+
+/* Cards: any white surface with a thick black border gets a hard shadow */
+[class~="bg-zinc-900"][class~="border-2"] {
+  box-shadow: 4px 4px 0 0 #000;
+}
+
+/* Lavender buttons and links: lift on hover, press flat on click */
+a[class~="bg-violet-300"],
+button[class~="bg-violet-300"],
+a[class~="bg-emerald-500"],
+button[class~="bg-emerald-500"] {
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+  font-weight: 700;
+  color: #000;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+a[class~="bg-violet-300"]:hover,
+button[class~="bg-violet-300"]:hover,
+a[class~="bg-emerald-500"]:hover,
+button[class~="bg-emerald-500"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #000;
+}
+
+a[class~="bg-violet-300"]:active,
+button[class~="bg-violet-300"]:active,
+a[class~="bg-emerald-500"]:active,
+button[class~="bg-emerald-500"]:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 #000;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Visible, friendly focus for keyboard users */
+:focus-visible {
+  outline: 3px solid var(--lavender-deep);
+  outline-offset: 3px;
+}
+
+input,
+textarea,
+select {
+  border-color: #000;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--lavender-deep);
+  outline-offset: 2px;
+  box-shadow: 4px 4px 0 0 #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Translucent card variants (bg-zinc-900/60 etc.) get the same hard shadow */
+[class*="bg-zinc-900/"][class~="border-2"] {
+  background-color: #fff;
+  box-shadow: 4px 4px 0 0 #000;
 }

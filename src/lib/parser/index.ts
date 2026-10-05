@@ -15,10 +15,16 @@ export async function parseResumeFile(
 
   try {
     if (ext === 'pdf') {
-      // Dynamic import or require for pdf-parse server-side compatibility
-      const pdfParse = require('pdf-parse');
-      const parsed = await pdfParse(fileBuffer);
-      const text = parsed.text ? parsed.text.trim() : '';
+      // pdf-parse v2 uses a class API (v1 was a plain function)
+      const { PDFParse } = await import('pdf-parse');
+      const parser = new PDFParse({ data: new Uint8Array(fileBuffer) });
+      let text = '';
+      try {
+        const parsed = await parser.getText();
+        text = parsed.text ? parsed.text.trim() : '';
+      } finally {
+        await parser.destroy();
+      }
       if (!text || text.length < 20) {
         return {
           text: '',

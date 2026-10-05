@@ -132,7 +132,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
   return (
     <div className="min-h-screen bg-zinc-950 pb-32">
       {/* Sticky Top Live Match Score Bar */}
-      <div className="sticky top-16 z-40 w-full border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md py-3.5 shadow-lg">
+      <div className="sticky top-16 z-40 w-full border-b-2 border-black bg-zinc-900/90 py-3.5 shadow-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-6">
             <div>
@@ -140,15 +140,15 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                 Live Match Score
               </span>
               <div className="flex items-center gap-3">
-                <span className="text-2xl font-extrabold text-emerald-400">
+                <span className="text-2xl font-extrabold text-violet-700">
                   {currentAnalysis.overallScore}%
                 </span>
                 {scoreDiff !== 0 && (
                   <span
                     className={`inline-flex items-center gap-0.5 rounded px-2 py-0.5 text-xs font-bold ${
                       scoreDiff > 0
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                        ? 'bg-violet-200 text-violet-700 border-2 border-black'
+                        : 'bg-red-200 text-red-400 border-2 border-black'
                     }`}
                   >
                     <TrendingUp className="h-3.5 w-3.5" />
@@ -161,15 +161,15 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
               </div>
             </div>
 
-            <div className="hidden lg:flex items-center gap-4 border-l border-zinc-800 pl-6 text-xs text-zinc-400">
+            <div className="hidden lg:flex items-center gap-4 border-l-2 border-black pl-6 text-xs text-zinc-400">
               <div>
-                Req Skills: <span className="font-bold text-emerald-400">{currentAnalysis.scoreBreakdown.requiredSkills}%</span>
+                Req Skills: <span className="font-bold text-violet-700">{currentAnalysis.scoreBreakdown.requiredSkills}%</span>
               </div>
               <div>
-                Keywords: <span className="font-bold text-emerald-400">{currentAnalysis.scoreBreakdown.keywordCoverage}%</span>
+                Keywords: <span className="font-bold text-violet-700">{currentAnalysis.scoreBreakdown.keywordCoverage}%</span>
               </div>
               <div>
-                Experience: <span className="font-bold text-emerald-400">{currentAnalysis.scoreBreakdown.experienceAlignment}%</span>
+                Experience: <span className="font-bold text-violet-700">{currentAnalysis.scoreBreakdown.experienceAlignment}%</span>
               </div>
             </div>
           </div>
@@ -178,7 +178,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
             <button
               onClick={handleReanalyze}
               disabled={isReanalyzing}
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2 text-xs font-semibold text-zinc-950 hover:bg-emerald-400 transition-all shadow-md shadow-emerald-950/40 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-violet-300 px-5 py-2 text-xs font-semibold text-black hover:bg-violet-400 transition-all shadow-md disabled:opacity-50"
             >
               <RefreshCw className={`h-4 w-4 ${isReanalyzing ? 'animate-spin' : ''}`} />
               <span>Re-Analyze Resume</span>
@@ -187,7 +187,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
         </div>
 
         {reanalyzeExplanation && (
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-2 text-xs text-emerald-400 font-medium">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-2 text-xs text-violet-700 font-medium">
             {reanalyzeExplanation}
           </div>
         )}
@@ -196,8 +196,8 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
       {/* Editor Content Area */}
       <main className="mx-auto max-w-4xl px-4 pt-8 space-y-8">
         {/* Header Section */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 space-y-4">
-          <h2 className="text-sm font-semibold text-zinc-100 border-b border-zinc-800 pb-2">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-4">
+          <h2 className="text-sm font-semibold text-zinc-100 border-b-2 border-black pb-2">
             Header & Contact Info
           </h2>
 
@@ -208,7 +208,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                 type="text"
                 value={resume.name}
                 onChange={(e) => setResume({ ...resume, name: e.target.value })}
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+                className="w-full rounded-lg border-2 border-black bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-black focus:outline-none"
               />
             </div>
             <div>
@@ -217,48 +217,48 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                 type="text"
                 value={resume.email}
                 onChange={(e) => setResume({ ...resume, email: e.target.value })}
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+                className="w-full rounded-lg border-2 border-black bg-zinc-950 px-3 py-2 text-xs text-zinc-200 focus:border-black focus:outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Summary Section */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 space-y-3">
-          <h2 className="text-sm font-semibold text-zinc-100 border-b border-zinc-800 pb-2">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-3">
+          <h2 className="text-sm font-semibold text-zinc-100 border-b-2 border-black pb-2">
             Professional Summary
           </h2>
           <textarea
             rows={3}
             value={resume.summary}
             onChange={(e) => setResume({ ...resume, summary: e.target.value })}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none leading-relaxed"
+            className="w-full rounded-lg border-2 border-black bg-zinc-950 p-3 text-xs text-zinc-200 focus:border-black focus:outline-none leading-relaxed"
           />
         </div>
 
         {/* Technical Skills Section */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 space-y-3">
-          <h2 className="text-sm font-semibold text-zinc-100 border-b border-zinc-800 pb-2">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-3">
+          <h2 className="text-sm font-semibold text-zinc-100 border-b-2 border-black pb-2">
             Technical Skills (Comma separated)
           </h2>
           <textarea
             rows={2}
             value={resume.skills.join(', ')}
             onChange={(e) => handleSkillsChange(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none font-mono"
+            className="w-full rounded-lg border-2 border-black bg-zinc-950 p-3 text-xs text-zinc-200 focus:border-black focus:outline-none font-mono"
           />
         </div>
 
         {/* Experience Section */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 space-y-6">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 space-y-6">
+          <div className="flex items-center justify-between border-b-2 border-black pb-3">
             <h2 className="text-sm font-semibold text-zinc-100">Work Experience</h2>
           </div>
 
           {resume.experience.map((exp) => (
             <div
               key={exp.id}
-              className="rounded-lg border border-zinc-800 bg-zinc-950 p-5 space-y-4"
+              className="rounded-lg border-2 border-black bg-zinc-950 p-5 space-y-4"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
@@ -274,7 +274,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                         ),
                       })
                     }
-                    className="w-full rounded border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded border-2 border-black bg-zinc-900 px-3 py-1.5 text-xs text-zinc-200 focus:border-black focus:outline-none"
                   />
                 </div>
 
@@ -291,7 +291,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                         ),
                       })
                     }
-                    className="w-full rounded border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded border-2 border-black bg-zinc-900 px-3 py-1.5 text-xs text-zinc-200 focus:border-black focus:outline-none"
                   />
                 </div>
               </div>
@@ -307,14 +307,14 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                       onChange={(e) =>
                         handleUpdateExpBullet(exp.id, bulletIdx, e.target.value)
                       }
-                      className="w-full rounded border border-zinc-800 bg-zinc-900 p-2.5 text-xs text-zinc-200 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded border-2 border-black bg-zinc-900 p-2.5 text-xs text-zinc-200 focus:border-black focus:outline-none"
                     />
 
                     <div className="flex flex-col gap-1.5 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleOpenAiModal(exp.id, bulletIdx, bullet)}
-                        className="inline-flex items-center gap-1 rounded bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 text-[11px] font-medium text-emerald-400 hover:bg-emerald-500/20"
+                        className="inline-flex items-center gap-1 rounded bg-violet-200 border-2 border-black px-2.5 py-1 text-[11px] font-medium text-violet-700 hover:bg-violet-200"
                       >
                         <Sparkles className="h-3 w-3" />
                         <span>AI Suggest</span>
@@ -334,7 +334,7 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
                 <button
                   type="button"
                   onClick={() => handleAddExpBullet(exp.id)}
-                  className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:underline pt-1"
+                  className="inline-flex items-center gap-1.5 text-xs text-violet-700 hover:underline pt-1"
                 >
                   <Plus className="h-3.5 w-3.5" />
                   <span>Add Experience Bullet</span>

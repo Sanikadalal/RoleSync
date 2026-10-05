@@ -117,18 +117,18 @@ export function UploadStudio() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Flow Header */}
       <div className="mb-8 text-center max-w-2xl mx-auto space-y-2">
-        <h1 className="text-3xl font-bold text-zinc-100 tracking-tight">
-          Analyze Your Resume Match
+        <h1 className="text-4xl sm:text-5xl text-black">
+          Check your resume
         </h1>
-        <p className="text-sm text-zinc-400">
-          Upload your current resume and paste the target job description to generate an explainable match matrix.
+        <p className="text-base text-zinc-300">
+          Two quick steps: add your resume, then paste the job you want. We&apos;ll show how well you match.
         </p>
 
         <div className="pt-3 flex justify-center">
           <button
             type="button"
             onClick={handleLoadDemoData}
-            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-medium text-emerald-400 hover:bg-emerald-500/20 transition-all"
+            className="inline-flex items-center gap-1.5 border-2 border-black bg-yellow-300 px-3.5 py-1.5 text-xs font-bold text-black shadow-[3px_3px_0_0_#000] hover:bg-violet-200 transition-all"
           >
             <Sparkles className="h-3.5 w-3.5" />
             <span>Load Demo Data (Backend Developer)</span>
@@ -138,7 +138,7 @@ export function UploadStudio() {
 
       {/* Error Alert Banner */}
       {errorMessage && (
-        <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-400 flex items-start gap-3">
+        <div className="mb-6 rounded-lg border-2 border-black bg-red-200 p-4 text-xs text-red-400 flex items-start gap-3">
           <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
           <div className="flex-1">{errorMessage}</div>
           <button type="button" onClick={() => setErrorMessage(null)}>
@@ -151,11 +151,11 @@ export function UploadStudio() {
         {/* Main Dual Area */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* LEFT: Resume Upload */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 flex flex-col justify-between">
+          <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-400 font-semibold text-xs border border-emerald-500/20">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-md bg-violet-200 text-violet-700 font-semibold text-xs border-2 border-black">
                     1
                   </div>
                   <h2 className="text-base font-semibold text-zinc-100">Your Resume</h2>
@@ -164,7 +164,7 @@ export function UploadStudio() {
                 <button
                   type="button"
                   onClick={() => setUseTextMode(!useTextMode)}
-                  className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors"
+                  className="text-xs text-zinc-400 hover:text-violet-700 transition-colors"
                 >
                   {useTextMode ? 'Switch to File Upload' : 'Paste Raw Text'}
                 </button>
@@ -177,7 +177,7 @@ export function UploadStudio() {
                       onDragOver={(e) => e.preventDefault()}
                       onDrop={handleFileDrop}
                       onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-zinc-700 hover:border-emerald-500/50 rounded-xl p-8 text-center cursor-pointer bg-zinc-950/40 hover:bg-zinc-950/80 transition-all group"
+                      className="border-2 border-dashed border-black hover:border-black rounded-xl p-8 text-center cursor-pointer bg-zinc-950/40 hover:bg-white transition-all group"
                     >
                       <input
                         ref={fileInputRef}
@@ -190,7 +190,7 @@ export function UploadStudio() {
                           }
                         }}
                       />
-                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 group-hover:bg-emerald-500/10 border border-zinc-800 text-zinc-400 group-hover:text-emerald-400 transition-all">
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 group-hover:bg-violet-200 border-2 border-black text-zinc-400 group-hover:text-violet-700 transition-all">
                         <Upload className="h-6 w-6" />
                       </div>
                       <p className="mt-4 text-sm font-medium text-zinc-200">
@@ -199,9 +199,9 @@ export function UploadStudio() {
                       <p className="mt-1 text-xs text-zinc-400">PDF, DOCX, or TXT up to 10MB</p>
                     </div>
                   ) : (
-                    <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4 flex items-center justify-between">
+                    <div className="rounded-lg border-2 border-black bg-violet-200 p-4 flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-200 text-violet-700 border-2 border-black">
                           <FileText className="h-5 w-5" />
                         </div>
                         <div>
@@ -230,7 +230,7 @@ export function UploadStudio() {
                   value={resumeText}
                   onChange={(e) => setResumeText(e.target.value)}
                   placeholder="Paste your raw resume text here (Summary, Work Experience, Skills, Education)..."
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-xs text-zinc-200 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none font-mono"
+                  className="w-full rounded-lg border-2 border-black bg-zinc-950 p-3 text-xs text-zinc-200 placeholder-zinc-400 focus:border-black focus:outline-none font-mono"
                 />
               )}
             </div>
@@ -240,10 +240,10 @@ export function UploadStudio() {
           </div>
 
           {/* RIGHT: Job Description */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 flex flex-col justify-between">
+          <div className="rounded-xl border-2 border-black bg-zinc-900/60 p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-400 font-semibold text-xs border border-emerald-500/20">
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-violet-200 text-violet-700 font-semibold text-xs border-2 border-black">
                   2
                 </div>
                 <h2 className="text-base font-semibold text-zinc-100">Job Description (JD)</h2>
@@ -254,7 +254,7 @@ export function UploadStudio() {
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Paste the target job description text here (Key requirements, required skills, responsibilities, tools)..."
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-xs text-zinc-200 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none font-mono leading-relaxed"
+                className="w-full rounded-lg border-2 border-black bg-zinc-950 p-3 text-xs text-zinc-200 placeholder-zinc-400 focus:border-black focus:outline-none font-mono leading-relaxed"
               />
             </div>
 
@@ -265,7 +265,7 @@ export function UploadStudio() {
         </div>
 
         {/* Optional Context Metadata */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="rounded-xl border-2 border-black bg-zinc-900/40 p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-medium text-zinc-400 mb-1 flex items-center gap-1.5">
               <Briefcase className="h-3.5 w-3.5 text-zinc-400" />
@@ -276,7 +276,7 @@ export function UploadStudio() {
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value)}
               placeholder="e.g. Backend Developer"
-              className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-lg border-2 border-black bg-zinc-950 px-3 py-2 text-xs text-zinc-200 placeholder-zinc-400 focus:border-black focus:outline-none"
             />
           </div>
 
@@ -290,7 +290,7 @@ export function UploadStudio() {
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               placeholder="e.g. Acme Corp"
-              className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-xs text-zinc-200 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-lg border-2 border-black bg-zinc-950 px-3 py-2 text-xs text-zinc-200 placeholder-zinc-400 focus:border-black focus:outline-none"
             />
           </div>
         </div>
@@ -300,7 +300,7 @@ export function UploadStudio() {
           <button
             type="submit"
             disabled={isAnalyzing}
-            className="w-full sm:w-auto min-w-[240px] inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-8 py-3.5 text-sm font-semibold text-zinc-950 hover:bg-emerald-400 transition-all disabled:opacity-50 shadow-lg shadow-emerald-950/40"
+            className="w-full sm:w-auto min-w-[240px] inline-flex items-center justify-center gap-2 rounded-xl bg-violet-300 px-8 py-3.5 text-sm font-semibold text-black hover:bg-violet-400 transition-all disabled:opacity-50 shadow-lg"
           >
             {isAnalyzing ? (
               <>

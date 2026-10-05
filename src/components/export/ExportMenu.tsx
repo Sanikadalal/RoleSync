@@ -22,14 +22,14 @@ export function ExportMenu({ analysis }: ExportMenuProps) {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-2 rounded-xl bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-200 hover:bg-zinc-700 transition-all border border-zinc-700"
+        className="inline-flex items-center gap-2 rounded-xl bg-zinc-800 px-4 py-2.5 text-xs font-semibold text-zinc-200 hover:bg-zinc-700 transition-all border-2 border-black"
       >
-        <Download className="h-4 w-4 text-emerald-400" />
+        <Download className="h-4 w-4 text-violet-700" />
         <span>Export</span>
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 rounded-xl border border-zinc-800 bg-zinc-900 p-2 shadow-2xl z-50 space-y-1">
+        <div className="absolute right-0 mt-2 w-56 rounded-xl border-2 border-black bg-zinc-900 p-2 shadow-2xl z-50 space-y-1">
           <button
             onClick={() => {
               setIsOpen(false);
@@ -37,7 +37,7 @@ export function ExportMenu({ analysis }: ExportMenuProps) {
             }}
             className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-200 hover:bg-zinc-800 rounded-lg transition-colors"
           >
-            <Printer className="h-4 w-4 text-emerald-400" />
+            <Printer className="h-4 w-4 text-violet-700" />
             <span>Download Analysis (PDF)</span>
           </button>
 
@@ -48,14 +48,14 @@ export function ExportMenu({ analysis }: ExportMenuProps) {
             }}
             className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-200 hover:bg-zinc-800 rounded-lg transition-colors"
           >
-            <FileText className="h-4 w-4 text-emerald-400" />
+            <FileText className="h-4 w-4 text-violet-700" />
             <span>Download Optimized Resume</span>
           </button>
         </div>
       )}
 
       {exported && (
-        <div className="fixed bottom-4 right-4 z-50 rounded-lg bg-emerald-500 text-zinc-950 px-4 py-2 text-xs font-semibold shadow-lg flex items-center gap-2">
+        <div className="fixed bottom-4 right-4 z-50 rounded-lg bg-violet-300 text-black px-4 py-2 text-xs font-semibold shadow-lg flex items-center gap-2">
           <Check className="h-4 w-4" />
           <span>Export trigger sent to print driver.</span>
         </div>
