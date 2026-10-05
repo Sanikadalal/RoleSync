@@ -1,12 +1,13 @@
 import { AIProvider } from './AIProvider';
 import { MockAIProvider } from './MockAIProvider';
+import { JevProvider } from './JevProvider';
 
 export function getAIProvider(): AIProvider {
-  // Can be extended to initialize OpenAI / Gemini if environment keys exist
-  const apiKey = process.env.OPENAI_API_KEY || process.env.GEMINI_API_KEY;
-  if (apiKey) {
-    // Return production AI provider wrapper if key exists
-    return new MockAIProvider(); // Graceful fallback
+  // Jev (TypeSafe System One) handles matching, seniority and bullet-quality judgments.
+  // Without a key the app runs in deterministic Mock / Demo mode.
+  const jevKey = process.env.TYPESAFE_API_KEY;
+  if (jevKey) {
+    return new JevProvider(jevKey);
   }
   return new MockAIProvider();
 }
