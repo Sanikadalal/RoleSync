@@ -151,12 +151,13 @@ export class JevProvider extends MockAIProvider {
 
     const answers = await askJev(this.apiKey, state, questions);
 
-    // 1. Skills: trust Jev when it is confident, otherwise keep the keyword result.
+    // 1. Skills: trust Jev when its top choice has probability >= MIN_CONFIDENCE, otherwise keep the keyword result.
     const updatedSkills: SkillMatch[] = base.skills.map((s, i) => {
       const a = i < MAX_SKILLS ? answers[`s${i}`] : undefined;
-      if (!a?.choice || (a.confidence ?? 0) < MIN_CONFIDENCE) return s;
+      const p = a?.probabilities ?? {};
+      const top = a?.choice ? p[a.choice] ?? 0 : 0;
+      if (!a?.choice || top < MIN_CONFIDENCE) return s;
 
-      const p = a.probabilities ?? {};
       const pct = Math.round(100 * (p.matched ?? 0) + 55 * (p.partial ?? 0));
       const status = a.choice as SkillMatch['status'];
       const jevOnly = s.status !== status;
@@ -164,7 +165,7 @@ export class JevProvider extends MockAIProvider {
         ...s,
         status,
         matchPercentage: pct,
-        confidence: (a.confidence ?? 0) >= 0.85 ? 'high' : 'medium',
+        confidence: top >= 0.85 ? 'high' : 'medium',
         evidence:
           jevOnly && status !== 'missing' && s.status === 'missing'
             ? `Equivalent or related experience found for "${s.skill}" (semantic match).`
