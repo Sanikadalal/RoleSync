@@ -71,12 +71,12 @@ export async function parseResumeFile(
         error: `Unsupported file type: .${ext}. Please upload a PDF, DOCX, or TXT file.`,
       };
     }
-  } catch (err: any) {
+  } catch (err) {
     return {
       text: '',
       wordCount: 0,
-      format: (ext as any) || 'txt',
-      error: `Failed to extract text from file: ${err.message || 'Corrupted or unreadable format.'}`,
+      format: (['pdf', 'docx', 'txt'].includes(ext ?? '') ? (ext as ExtractedTextResult['format']) : 'txt'),
+      error: `Failed to extract text from file: ${(err instanceof Error ? err.message : '') || 'Corrupted or unreadable format.'}`,
     };
   }
 }

@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
     const resumeFile = formData.get('resumeFile') as File | null;
     const resumeTextRaw = formData.get('resumeText') as string | null;
     const jdText = formData.get('jobDescription') as string | null;
-    const targetRole = (formData.get('targetRole') as string) || 'Target Role';
-    const company = (formData.get('company') as string) || 'Target Company';
+    const targetRole = (formData.get('targetRole') as string) || '';
+    const company = (formData.get('company') as string) || '';
 
     // 1. Validations
     if (!jdText || jdText.trim().length < 15) {
@@ -65,10 +65,10 @@ export async function POST(req: NextRequest) {
       jobId: parsedJob.id,
       analysis,
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error('Analysis error:', err);
     return NextResponse.json(
-      { error: err.message || 'An unexpected error occurred during resume analysis.' },
+      { error: (err instanceof Error ? err.message : '') || 'An unexpected error occurred during resume analysis.' },
       { status: 500 }
     );
   }

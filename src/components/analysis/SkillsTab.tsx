@@ -114,7 +114,7 @@ export function SkillsTab({ skills }: SkillsTabProps) {
 
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
             className="rounded-lg border-2 border-black bg-zinc-950 px-3 py-1.5 text-xs text-zinc-300 focus:outline-none"
           >
             <option value="importance">Sort: Importance</option>

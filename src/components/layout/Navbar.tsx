@@ -20,7 +20,7 @@ export function Navbar() {
           <div className="flex h-10 w-10 items-center justify-center border-2 border-black bg-violet-300 shadow-[3px_3px_0_0_#000] transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5">
             <FileCheck className="h-5 w-5 text-black" />
           </div>
-          <span className="font-display text-xl font-extrabold tracking-tight text-black">ResumeMatch</span>
+          <span className="font-display text-xl font-extrabold tracking-tight text-black">RoleSync</span>
         </Link>
 
         <nav className="flex items-center gap-1 text-sm font-bold sm:gap-2">

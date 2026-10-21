@@ -14,6 +14,8 @@ import {
   normalizeSkill,
   getSkillCategory,
   areSkillsRelated,
+  findSkillsInText,
+  textMentionsSkill,
 } from './skillDictionary';
 
 export function computeOverallScore(b: ScoreBreakdown): number {
@@ -67,9 +69,9 @@ export function calculateDeterministicScore(
       // Check experience items
       for (const exp of resume.experience) {
         const expText = [exp.role, ...exp.description, ...exp.technologies].join(' ');
-        if (expText.toLowerCase().includes(normSkill.toLowerCase())) {
+        if (textMentionsSkill(expText, normSkill)) {
           evidenceFound = `Demonstrated as ${exp.role} at ${exp.company}: "${
-            exp.description.find((d) => d.toLowerCase().includes(normSkill.toLowerCase())) || exp.description[0] || exp.role
+            exp.description.find((d) => textMentionsSkill(d, normSkill)) || exp.description[0] || exp.role
           }"`;
           sourceSection = `Experience — ${exp.company}`;
           matchScore = 100;
@@ -82,9 +84,9 @@ export function calculateDeterministicScore(
       if (!evidenceFound) {
         for (const proj of resume.projects) {
           const projText = [proj.name, ...proj.description, ...proj.technologies].join(' ');
-          if (projText.toLowerCase().includes(normSkill.toLowerCase())) {
+          if (textMentionsSkill(projText, normSkill)) {
             evidenceFound = `Project "${proj.name}": "${
-              proj.description.find((d) => d.toLowerCase().includes(normSkill.toLowerCase())) || proj.description[0] || proj.name
+              proj.description.find((d) => textMentionsSkill(d, normSkill)) || proj.description[0] || proj.name
             }"`;
             sourceSection = `Project — ${proj.name}`;
             matchScore = 90;
@@ -218,14 +220,15 @@ export function calculateDeterministicScore(
       : 75;
 
   // 3. Keyword Analysis
-  const allJdKeywords = [...job.keywords, ...job.technicalRequirements, ...job.tools];
+  const allJdKeywords = [...new Set([...job.keywords, ...job.tools])];
+  const resumeSkillSet = new Set(findSkillsInText(resumeFullText));
   const presentKeywords: string[] = [];
   const missingKeywords: string[] = [];
 
   for (const kw of allJdKeywords) {
     const cleanKw = kw.trim();
     if (!cleanKw) continue;
-    if (resumeFullText.includes(cleanKw.toLowerCase())) {
+    if (resumeFullText.includes(cleanKw.toLowerCase()) || resumeSkillSet.has(normalizeSkill(cleanKw))) {
       if (!presentKeywords.includes(cleanKw)) presentKeywords.push(cleanKw);
     } else {
       if (!missingKeywords.includes(cleanKw)) missingKeywords.push(cleanKw);
@@ -241,7 +244,7 @@ export function calculateDeterministicScore(
     present: presentKeywords,
     missing: missingKeywords,
     overused: ['responsible for', 'worked on', 'helped with'],
-    importantPhrases: job.domainTerms.length > 0 ? job.domainTerms : ['Scalable Architecture', 'REST APIs', 'Cloud Microservices'],
+    importantPhrases: job.domainTerms,
   };
 
   // 4. Experience & Project Alignment

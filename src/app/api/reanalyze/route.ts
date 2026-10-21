@@ -55,9 +55,9 @@ export async function POST(req: NextRequest) {
       explanation,
       versionNumber: nextVersionNumber,
     });
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
-      { error: err.message || 'Failed to re-analyze resume.' },
+      { error: (err instanceof Error ? err.message : '') || 'Failed to re-analyze resume.' },
       { status: 500 }
     );
   }

@@ -24,9 +24,9 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json({ success: true, suggestions });
-  } catch (err: any) {
+  } catch (err) {
     return NextResponse.json(
-      { error: err.message || 'Failed to generate AI suggestions.' },
+      { error: (err instanceof Error ? err.message : '') || 'Failed to generate AI suggestions.' },
       { status: 500 }
     );
   }

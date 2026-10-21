@@ -120,8 +120,8 @@ export function ResumeEditor({ initialResume, initialAnalysis }: ResumeEditorPro
       setPreviousScore(currentAnalysis.overallScore);
       setCurrentAnalysis(data.newAnalysis);
       setReanalyzeExplanation(data.explanation);
-    } catch (err: any) {
-      alert(err.message || 'Error re-analyzing resume');
+    } catch (err) {
+      alert((err instanceof Error ? err.message : '') || 'Error re-analyzing resume');
     } finally {
       setIsReanalyzing(false);
     }

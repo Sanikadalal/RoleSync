@@ -1,10 +1,10 @@
-# ResumeMatch 🚀
+# RoleSync 🚀
 
 > **Production-Quality Resume Optimization & Job-Matching SaaS Platform**
 
-ResumeMatch is a modern full-stack web application designed for developers and job seekers to analyze, optimize, and engineer their resumes against specific target Job Descriptions (JDs).
+RoleSync is a modern full-stack web application designed for developers and job seekers to analyze, optimize, and engineer their resumes against specific target Job Descriptions (JDs).
 
-Unlike black-box ATS scorers, ResumeMatch provides **explainable multi-signal matching**, detailed skill gap matrices with explicit resume evidence, anti-hallucination AI bullet suggestions, live interactive resume editing, and version control comparison.
+Unlike black-box ATS scorers, RoleSync provides **explainable multi-signal matching**, detailed skill gap matrices with explicit resume evidence, anti-hallucination AI bullet suggestions, live interactive resume editing, and version control comparison.
 
 ---
 
