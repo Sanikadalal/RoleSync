@@ -1,7 +1,19 @@
-// Minimal client for TypeSafe's Jev (System One) API: POST /v1/systemone.
-// Docs: https://docs.typesafe.ai/api.md
+// Minimal client for Jev (TypeSafe System One). Two ways to reach it, same request shape:
+//  - TypeSafe direct:  POST https://api.typesafe.ai/v1/systemone      (docs.typesafe.ai)
+//  - OpenRouter:       POST https://openrouter.ai/api/alpha/decisions (keys start with "sk-or-")
 
-const JEV_URL = 'https://api.typesafe.ai/v1/systemone';
+function endpointFor(apiKey: string): { url: string; model: string } {
+  if (apiKey.startsWith('sk-or-')) {
+    return {
+      url: 'https://openrouter.ai/api/alpha/decisions',
+      model: process.env.JEV_MODEL || 'typesafe/jev-1.13',
+    };
+  }
+  return {
+    url: 'https://api.typesafe.ai/v1/systemone',
+    model: process.env.JEV_MODEL || 'jev-latest',
+  };
+}
 
 export type JevQuestion =
   | { type: 'choice'; instructions: string; criteria: Record<string, string> }
@@ -23,7 +35,8 @@ export async function askJev(
   questions: Record<string, JevQuestion>,
   timeoutMs = 20000
 ): Promise<Record<string, JevAnswer>> {
-  const res = await fetch(JEV_URL, {
+  const { url, model } = endpointFor(apiKey);
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -31,7 +44,7 @@ export async function askJev(
     },
     body: JSON.stringify({
       state,
-      model: process.env.JEV_MODEL || 'jev-latest',
+      model,
       questions,
     }),
     signal: AbortSignal.timeout(timeoutMs),

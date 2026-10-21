@@ -11,13 +11,24 @@ import {
   getDemoSnapshots,
 } from '../demo/demoData';
 
-// Memory store for server/client runtime fallback
-const memoryStore = {
+// Memory store for server/client runtime fallback.
+// Kept on globalThis so API routes and pages share one store even when the
+// bundler gives each route its own copy of this module.
+const globalForStore = globalThis as unknown as {
+  __roleSyncStore?: {
+    resumes: Map<string, NormalizedResume>;
+    jobs: Map<string, JobAnalysis>;
+    analyses: Map<string, MatchAnalysis>;
+    snapshots: Map<string, ResumeVersionSnapshot[]>;
+  };
+};
+
+const memoryStore = (globalForStore.__roleSyncStore ??= {
   resumes: new Map<string, NormalizedResume>(),
   jobs: new Map<string, JobAnalysis>(),
   analyses: new Map<string, MatchAnalysis>(),
   snapshots: new Map<string, ResumeVersionSnapshot[]>(),
-};
+});
 
 // Pre-seed demo data
 memoryStore.resumes.set(DEMO_RESUME.id, DEMO_RESUME);

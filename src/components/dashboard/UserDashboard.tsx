@@ -32,7 +32,7 @@ export function UserDashboard({ analyses }: UserDashboardProps) {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-2 border-black pb-6">
           <div>
-            <h1 className="text-2xl font-bold text-zinc-100">ResumeMatch Dashboard</h1>
+            <h1 className="text-2xl font-bold text-zinc-100">RoleSync Dashboard</h1>
             <p className="text-xs text-zinc-400 mt-1">
               Track your job description match scores, resume versions, and skill optimization progression.
             </p>

@@ -106,8 +106,8 @@ export function UploadStudio() {
       }
 
       router.push(`/analysis/${data.analysisId}`);
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Analysis request failed. Please try again.');
+    } catch (err) {
+      setErrorMessage((err instanceof Error ? err.message : '') || 'Analysis request failed. Please try again.');
     } finally {
       setIsAnalyzing(false);
     }

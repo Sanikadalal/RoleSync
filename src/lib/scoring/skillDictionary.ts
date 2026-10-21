@@ -88,7 +88,93 @@ const SYNONYM_MAP: Record<string, string> = {
   jest: 'Jest',
   cypress: 'Cypress',
   pytest: 'PyTest',
+
+  // More languages & web
+  kotlin: 'Kotlin',
+  swift: 'Swift',
+  scala: 'Scala',
+  sql: 'SQL',
+  html: 'HTML',
+  html5: 'HTML',
+  css: 'CSS',
+  css3: 'CSS',
+  sass: 'Sass',
+  tailwind: 'Tailwind CSS',
+  'tailwind css': 'Tailwind CSS',
+  redux: 'Redux',
+  svelte: 'Svelte',
+  nuxt: 'Nuxt',
+  jquery: 'jQuery',
+  bash: 'Bash',
+  'shell scripting': 'Bash',
+  'asp.net': 'ASP.NET',
+  '.net': '.NET',
+  dotnet: '.NET',
+  laravel: 'Laravel',
+  rails: 'Ruby on Rails',
+  'ruby on rails': 'Ruby on Rails',
+  hibernate: 'Hibernate',
+  prisma: 'Prisma',
+  webpack: 'Webpack',
+  vite: 'Vite',
+
+  // Data & ML
+  'sql server': 'SQL Server',
+  cassandra: 'Cassandra',
+  snowflake: 'Snowflake',
+  bigquery: 'BigQuery',
+  spark: 'Apache Spark',
+  'apache spark': 'Apache Spark',
+  hadoop: 'Hadoop',
+  airflow: 'Airflow',
+  pandas: 'Pandas',
+  numpy: 'NumPy',
+  tensorflow: 'TensorFlow',
+  pytorch: 'PyTorch',
+  'scikit-learn': 'Scikit-learn',
+  sklearn: 'Scikit-learn',
+  'machine learning': 'Machine Learning',
+  'deep learning': 'Deep Learning',
+  nlp: 'NLP',
+  llm: 'LLMs',
+  llms: 'LLMs',
+  langchain: 'LangChain',
+  tableau: 'Tableau',
+  'power bi': 'Power BI',
+
+  // Cloud, DevOps & tooling
+  linux: 'Linux',
+  nginx: 'Nginx',
+  ansible: 'Ansible',
+  prometheus: 'Prometheus',
+  grafana: 'Grafana',
+  datadog: 'Datadog',
+  vercel: 'Vercel',
+  firebase: 'Firebase',
+  supabase: 'Supabase',
+  serverless: 'Serverless',
+  'aws lambda': 'AWS Lambda',
+  git: 'Git',
+  github: 'GitHub',
+  gitlab: 'GitLab',
+  jira: 'Jira',
+  postman: 'Postman',
+  maven: 'Maven',
+  gradle: 'Gradle',
+  figma: 'Figma',
+  selenium: 'Selenium',
+  playwright: 'Playwright',
+  mockito: 'Mockito',
+  oauth: 'OAuth',
+  jwt: 'JWT',
+  websockets: 'WebSockets',
+  agile: 'Agile',
+  scrum: 'Scrum',
 };
+
+// Short aliases that are also ordinary English words / fragments. They stay valid for
+// normalizing an explicit skill token ("Go") but are never matched inside free text.
+const AMBIGUOUS_ALIASES = new Set(['go', 'cs', 'ci', 'cd', 'next', 'rest', 'express', 'rb']);
 
 const CATEGORY_MAP: Record<string, string> = {
   // Languages
@@ -139,6 +225,80 @@ const CATEGORY_MAP: Record<string, string> = {
   gRPC: 'Architecture',
   'Apache Kafka': 'Messaging & Queues',
   RabbitMQ: 'Messaging & Queues',
+
+  SQL: 'Databases',
+  'SQL Server': 'Databases',
+  Cassandra: 'Databases',
+  Snowflake: 'Databases',
+  BigQuery: 'Databases',
+  Kotlin: 'Languages',
+  Swift: 'Languages',
+  Scala: 'Languages',
+  Bash: 'Languages',
+  HTML: 'Frontend',
+  CSS: 'Frontend',
+  Sass: 'Frontend',
+  'Tailwind CSS': 'Frontend',
+  Redux: 'Frontend',
+  Svelte: 'Frameworks',
+  Nuxt: 'Frameworks',
+  jQuery: 'Frontend',
+  'ASP.NET': 'Frameworks',
+  '.NET': 'Frameworks',
+  Laravel: 'Frameworks',
+  'Ruby on Rails': 'Frameworks',
+  Hibernate: 'Frameworks',
+  Prisma: 'Frameworks',
+  'Apache Spark': 'Data & ML',
+  Hadoop: 'Data & ML',
+  Airflow: 'Data & ML',
+  Pandas: 'Data & ML',
+  NumPy: 'Data & ML',
+  TensorFlow: 'Data & ML',
+  PyTorch: 'Data & ML',
+  'Scikit-learn': 'Data & ML',
+  'Machine Learning': 'Data & ML',
+  'Deep Learning': 'Data & ML',
+  NLP: 'Data & ML',
+  LLMs: 'Data & ML',
+  LangChain: 'Data & ML',
+  Tableau: 'Data & ML',
+  'Power BI': 'Data & ML',
+  Linux: 'Cloud & DevOps',
+  Nginx: 'Cloud & DevOps',
+  Ansible: 'Cloud & DevOps',
+  Prometheus: 'Cloud & DevOps',
+  Grafana: 'Cloud & DevOps',
+  Datadog: 'Cloud & DevOps',
+  Vercel: 'Cloud & DevOps',
+  Firebase: 'Cloud & DevOps',
+  Supabase: 'Cloud & DevOps',
+  Serverless: 'Cloud & DevOps',
+  'AWS Lambda': 'Cloud & DevOps',
+  Jenkins: 'Cloud & DevOps',
+  'GitHub Actions': 'Cloud & DevOps',
+  Git: 'Tools',
+  GitHub: 'Tools',
+  GitLab: 'Tools',
+  Jira: 'Tools',
+  Postman: 'Tools',
+  Maven: 'Tools',
+  Gradle: 'Tools',
+  Figma: 'Tools',
+  Webpack: 'Tools',
+  Vite: 'Tools',
+  JUnit: 'Testing',
+  Jest: 'Testing',
+  Cypress: 'Testing',
+  PyTest: 'Testing',
+  Selenium: 'Testing',
+  Playwright: 'Testing',
+  Mockito: 'Testing',
+  OAuth: 'Security',
+  JWT: 'Security',
+  WebSockets: 'Architecture',
+  Agile: 'Methodology',
+  Scrum: 'Methodology',
 };
 
 export function normalizeSkill(skillName: string): string {
@@ -180,4 +340,53 @@ export function areSkillsRelated(skillA: string, skillB: string): boolean {
     return true;
   }
   return false;
+}
+
+// ---- Free-text skill detection -------------------------------------------------
+
+const escapeRegex = (v: string) => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// One compiled matcher per alias; canonical names are aliases of themselves.
+const SKILL_MATCHERS: { canonical: string; re: RegExp }[] = (() => {
+  const aliases = new Map<string, string>();
+  for (const [alias, canonical] of Object.entries(SYNONYM_MAP)) {
+    aliases.set(alias, canonical);
+    aliases.set(canonical.toLowerCase(), canonical);
+  }
+  const out: { canonical: string; re: RegExp }[] = [];
+  for (const [alias, canonical] of aliases) {
+    if (AMBIGUOUS_ALIASES.has(alias)) continue;
+    out.push({
+      canonical,
+      re: new RegExp(`(?<![A-Za-z0-9_])${escapeRegex(alias)}(?![A-Za-z0-9_])`, 'i'),
+    });
+  }
+  return out;
+})();
+
+/** Canonical skills mentioned in free text, in order of first appearance. */
+export function findSkillsInText(text: string): string[] {
+  if (!text) return [];
+  const found = new Map<string, { start: number; end: number }>();
+  for (const { canonical, re } of SKILL_MATCHERS) {
+    const m = re.exec(text);
+    if (!m) continue;
+    const prev = found.get(canonical);
+    if (!prev || m.index < prev.start) found.set(canonical, { start: m.index, end: m.index + m[0].length });
+  }
+  const spans = [...found.entries()];
+  return spans
+    // "GitHub" inside "GitHub Actions" is the same mention, keep only the longer skill
+    .filter(([skill, a]) =>
+      !spans.some(([other, b]) => other !== skill && b.start <= a.start && b.end >= a.end && b.end - b.start > a.end - a.start)
+    )
+    .sort((x, y) => x[1].start - y[1].start)
+    .map(([skill]) => skill);
+}
+
+/** True when the text mentions the skill, including via an alias (RESTful -> REST APIs). */
+export function textMentionsSkill(text: string, skill: string): boolean {
+  const norm = normalizeSkill(skill);
+  if (text.toLowerCase().includes(norm.toLowerCase())) return true;
+  return findSkillsInText(text).includes(norm);
 }
